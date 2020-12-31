@@ -1,0 +1,19 @@
+{% extends "layout.html" %} {% block content %}
+<ul>
+  <li><a href="/">Home</a></li>
+  <li><a href="/author">Profile</a></li>
+</ul>
+<br />
+<h1>Insights Feed</h1>
+<hr />
+{% for insight in insights %}
+<h2>{{ insight.title }}</h2>
+<p>{{ insight.body }}</p>
+<address class="author-date">
+  -
+  <a href="{{ url_for('profile',username=insight.author.username) }}"
+    >{{ insight.author.username }}</a
+  >, {{ insight.date.strftime("%Y-%m-%d") }}
+</address>
+<hr />
+{% endfor %} {% endblock %}

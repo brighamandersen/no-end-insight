@@ -1,0 +1,16 @@
+{% extends "layout.html" %} {% block content %}
+<ul>
+  <li><a href="/">Home</a></li>
+  <li><a href="/profile">Profile</a></li>
+</ul>
+<br />
+<h1>Profile ({{ user.username }})</h1>
+<hr />
+{% for insight in user.insights %}
+<h2>{{ insight.title }}</h2>
+<p>{{ insight.body }}</p>
+<address class="author-date">
+  - {{ insight.author.username }}, {{ insight.date.strftime("%Y-%m-%d") }}
+</address>
+<hr />
+{% endfor %} {% endblock %}
