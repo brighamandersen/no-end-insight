@@ -5,7 +5,7 @@
 <h3>{{ insight.title }}</h3>
 <p>{{ insight.body }}</p>
 <address class="author-date">
-  -
+  —
   <a href="{{ url_for('profile',username=insight.author.username) }}"
     >{{ insight.author.username }}</a
   >, {{ insight.date.strftime("%m-%d-%y") }}
