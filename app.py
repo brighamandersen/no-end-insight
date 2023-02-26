@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, abort, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -6,7 +7,8 @@ from datetime import datetime
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////Coding/flask/noend-insight/app.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app.db')
+
 
 db = SQLAlchemy(app)
 
@@ -48,11 +50,21 @@ def profile(username=None):
         return render_template("profile.html", user=user)
 
 
-@app.route("/hello")
-def hello():
-    name = request.args.get("name", "world")
-    name = name.capitalize()
-    return f"Hello, {name}!"
+@app.route("/create")
+def create():
+    return render_template("create.html")
+
+@app.route("/share", methods=['POST'])
+def share():
+    title = request.form["title"]
+    body = request.form["body"]
+    author = HARD_CODED_CURR_USER
+    if title and body and author:
+        insight = Insight(title=title, body=body, author_id=author.id)
+        db.session.add(insight)
+        db.session.commit()
+    # Go back to home screen
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":

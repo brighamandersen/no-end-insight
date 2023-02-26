@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
+      href="{{ url_for('static', filename='styles.css') }}"
     />
-    <title>No-End Insight</title>
+    <title>No End Insight</title>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="/">Feed</a></li>
+        <li><a href="/create">Create Insight</a></li>
+        <li><a href="/author">Profile</a></li>
+      </ul>
+    </nav>
     <div id="content">{% block content %} {% endblock %}</div>
+    {% block scripts %} {% endblock %}
   </body>
 </html>
