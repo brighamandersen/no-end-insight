@@ -8,7 +8,7 @@
   -
   <a href="{{ url_for('profile',username=insight.author.username) }}"
     >{{ insight.author.username }}</a
-  >, {{ insight.date.strftime("%Y-%m-%d") }}
+  >, {{ insight.date.strftime("%m-%d-%y") }}
 </address>
 <hr />
 {% endfor %} {% endblock %}
