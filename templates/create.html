@@ -1,16 +1,42 @@
-{% extends "layout.html" %} {% block content %}
-<h1>Create Insight</h1>
-<form method="POST" action="{{ url_for('share') }}">
-  <label for="title">Title:</label>
-  <input type="text" id="title" name="title" required />
-  <br />
-  <br />
-  <label for="body">Body:</label>
-  <textarea type="text" id="body" name="body" required></textarea>
-  <br />
-  <br />
-  <button type="submit" id="share-button" disabled>Share</button>
-</form>
-{% endblock %} {% block scripts %}
-<script src="{{ url_for('static', filename='create.js') }}"></script>
+{% extends "layout.html" %} {% block nav_items %}
+<a class="nav-link" href="{{ url_for('feed') }}">Feed</a>
+<a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+<a class="nav-link active" href="{{ url_for('create') }}"> Create Insight </a>
+<a class="nav-link" href="{{ url_for('index') }}">Log Out</a>
+{% endblock %} {% block content %}
+<main class="content container portfolio-page">
+  <h1>Create New Insight</h1>
+  <form method="POST" action="{{ url_for('share') }}">
+    <section class="p-4">
+      <h3 class="sub-header">Add Insight Title</h3>
+      <input
+        type="text"
+        class="bg-dark text-white rounded"
+        name="insight-title"
+        id="insight-title"
+        placeholder="Type title here"
+        required
+      />
+    </section>
+    <section class="p-4">
+      <h3 class="sub-header">Add Insight Body</h3>
+      <textarea
+        class="bg-dark text-white rounded"
+        name="insight-body"
+        id="insight-body"
+        rows="5"
+        placeholder="Type body here"
+        required
+      ></textarea>
+    </section>
+    <section class="p-4">
+      <input
+        type="submit"
+        class="btn btn-warning yellow-btn w-100"
+        id="share-btn"
+        value="Share"
+      />
+    </section>
+  </form>
+</main>
 {% endblock %}
