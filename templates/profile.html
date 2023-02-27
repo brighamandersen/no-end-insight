@@ -1,33 +1,35 @@
 {% extends "layout.html" %} {% block nav_items %}
-<a class="nav-link" href="{{ url_for('feed') }}">Feed</a>
+<a class="nav-link" href="{{ url_for('index') }}">Feed</a>
 <a class="nav-link active" href="{{ url_for('profile') }}">Profile</a>
 <a class="nav-link" href="{{ url_for('create') }}"> Create Insight </a>
-<a class="nav-link" href="{{ url_for('index') }}">Log Out</a>
+<a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
 {% endblock %} {% block content %}
-<main class="content container feed-page">
+<main class="content container">
   <h1>My Profile ({{ user.username }})</h1>
-  <h3>My Bio</h3>
-  <p>
-    Hi, I'm Brigham Andersen! I love insights! Pumped to learn from your
-    insights! (FIXME PULL FROM ACTUAL DB)
-  </p>
-  <h3>My Insights</h3>
-  <section class="pt-2">
-    {% for insight in user.insights %}
+  <div class="p-4">
+    <h3 class="sub-header">My Bio</h3>
     <div class="card bg-dark m-3 my-4">
-      <div class="card-header">{{ insight.title }}</div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p class="card-text">{{ insight.body }}</p>
-          <footer class="blockquote-footer card-body-tag pt-3">
-            <a href="{{ url_for('profile',username=insight.author.username) }}"
-              >{{ insight.author.username }}</a
-            >, {{ insight.date.strftime("%m-%d-%y") }}
-          </footer>
-        </blockquote>
-      </div>
+      <div class="card-body">{{ user.bio }}</div>
     </div>
-    {% endfor %}
-  </section>
+    <h3 class="sub-header">My Insights</h3>
+    <section class="pt-2">
+      {% for insight in user.insights %}
+      <div class="card bg-dark m-3 my-4">
+        <div class="card-body">
+          <h4 class="card-title">{{ insight.title }}</h4>
+          <blockquote class="blockquote mb-0">
+            <p class="card-text">{{ insight.body }}</p>
+            <footer class="blockquote-footer pt-3">
+              <a
+                href="{{ url_for('profile',username=insight.author.username) }}"
+                >{{ insight.author.username }}</a
+              >, {{ insight.date.strftime("%m-%d-%y") }}
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </div>
 </main>
 {% endblock %}

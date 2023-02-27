@@ -1,14 +1,14 @@
 {% extends "layout.html" %} {% block nav_items %}
-<a class="nav-link" href="{{ url_for('feed') }}">Feed</a>
+<a class="nav-link" href="{{ url_for('index') }}">Feed</a>
 <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
 <a class="nav-link active" href="{{ url_for('create') }}"> Create Insight </a>
-<a class="nav-link" href="{{ url_for('index') }}">Log Out</a>
+<a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
 {% endblock %} {% block content %}
-<main class="content container portfolio-page">
+<main class="content container">
   <h1>Create New Insight</h1>
   <form method="POST" action="{{ url_for('share') }}">
     <section class="p-4">
-      <h3 class="sub-header">Add Insight Title</h3>
+      <h3 class="sub-header">Insight Title</h3>
       <input
         type="text"
         class="bg-dark text-white rounded"
@@ -19,7 +19,7 @@
       />
     </section>
     <section class="p-4">
-      <h3 class="sub-header">Add Insight Body</h3>
+      <h3 class="sub-header">Insight Body</h3>
       <textarea
         class="bg-dark text-white rounded"
         name="insight-body"

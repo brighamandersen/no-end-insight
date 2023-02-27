@@ -1,10 +1,10 @@
 {% extends "layout.html" %} {% block nav_items %}
-<a class="nav-link active" href="{{ url_for('feed') }}">Feed</a>
+<a class="nav-link active" href="{{ url_for('index') }}">Feed</a>
 <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
 <a class="nav-link" href="{{ url_for('create') }}"> Create Insight </a>
-<a class="nav-link" href="{{ url_for('index') }}">Log Out</a>
+<a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
 {% endblock %} {% block content %}
-<main class="content container feed-page">
+<main class="content container">
   <h1>My Feed</h1>
   <section class="pt-2">
     {% for insight in insights %}
