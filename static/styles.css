@@ -1,14 +1,16 @@
 /* Color Scheme */
 :root {
-  --platinum: #ebe9ec;
+  --light-text-color: #ebe9ec;
+  --dark-text-color: #9b9797; /* Darker version */
   /* Yellow is --bs-warning bootstrap warning color */
+  color-scheme: dark;
 }
 
 html,
 body {
   font-family: Helvetica, Arial, sans-serif;
   background: black;
-  color: var(--platinum);
+  color: var(--light-text-color);
 }
 
 input,
@@ -18,17 +20,11 @@ textarea {
   width: 100%;
 }
 
-nav > ul {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  padding: 1rem;
-}
+/* .navbar-right a {
+  color: red;
+  background: purple;
+  padding
+} */
 
 a {
   color: var(--bs-warning);
@@ -41,6 +37,8 @@ a {
 
 .active {
   font-weight: bold;
+  border-bottom-width: 2;
+  border-bottom: 3px solid var(--bs-warning);
 }
 
 .content {
@@ -57,21 +55,8 @@ a {
   letter-spacing: 2px;
 }
 
-.sub-header,
-.card-text,
-.card-header-tag,
-.name-footer {
-  color: #9b9797;
-}
-
-.card-header {
-  background-color: #414141;
-  color: var(--yellow);
-  font-size: large;
-}
-
-.card-body-tag {
-  color: #525252;
+.dark-text {
+  color: var(--dark-text-color);
 }
 
 .card-input {

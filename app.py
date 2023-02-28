@@ -40,13 +40,14 @@ class Insight(db.Model):
 
 @app.route("/")
 def index():
-    user = session['user_id'] # Get user's id from the session
+    user = session['user_id']
     # Go straight to feed if logged in
     if user:
-        return render_template("feed.html")
+        all_insights = Insight.query.order_by(Insight.date.desc()).all()
+        return render_template("feed.html", insights=all_insights)
     # Otherwise show login
     messages = get_flashed_messages()
-    return render_template("index.html", messages=messages)
+    return render_template("login.html", messages=messages)
 
 @app.route("/logout")
 def logout():
@@ -54,56 +55,51 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route("/feed")
-def feed():
-    all_insights = Insight.query.order_by(Insight.date.desc()).all()
-    return render_template("feed.html", insights=all_insights)
-
-
 @app.route("/profile")
 @app.route("/profile/<string:username>")
 def profile(username=None):
     # If no username provided, insert the username of who's currently logged in
-    user = session['user_id'] # Get user's id from the session
+    user = User.query.get(session['user_id'])
+
     if username:
         user = User.query.filter_by(username=username).first()
     if user is None:
         abort(404)
+    # owns_profile = user.username == username or 
     return render_template("profile.html", user=user)
 
 
-@app.route("/create")
-def create():
-    return render_template("create.html")
+@app.route("/post")
+def post():
+    return render_template("post.html")
 
 
-# Backend-only POST Endpoints
+# Backend-only POST API Endpoints
 
 
-@app.route("/login", methods=['POST'])
-def login():
+@app.route("/api/login", methods=['POST'])
+def api_login():
     username = request.form['username']
     password = request.form['password']
     user = User.query.filter_by(username=username, password=password).first()
     if user:
-        print('succeeded', user.id)
-        session['user_id'] = user.id  # Store user's id in the session
+        session['user_id'] = user.id
     else:
-        print('failed')
         flash('Invalid username or password. Try again.', 'error')
     return redirect(url_for('index'))
     
 
-@app.route("/share", methods=['POST'])
-def share():
+@app.route("/api/post", methods=['POST'])
+def api_post():
     title = request.form["insight-title"]
     body = request.form["insight-body"]
+    author = User.query.get(session['user_id'])
     if title and body and author:
         insight = Insight(title=title, body=body, author_id=author.id)
         db.session.add(insight)
         db.session.commit()
     # Go back to home screen
-    return redirect(url_for("feed"))
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
