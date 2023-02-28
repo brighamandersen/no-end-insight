@@ -7,9 +7,12 @@
   <i class="bi bi-plus me-1"></i>
   <span>Post</span>
 </a>
-<a class="nav-link px-1 mx-2 active" href="{{ url_for('profile') }}">
+<a
+  class="nav-link px-1 mx-2 {{ 'active' if auth_user.id == view_user.id else '' }}"
+  href="{{ url_for('profile') }}"
+>
   <i class="bi bi-person me-1"></i>
-  <span>Profile</span>
+  <span>{{ auth_user.username }}</span>
 </a>
 <a class="nav-link px-1 mx-2" href="{{ url_for('api_logout') }}">
   <i class="bi bi-box-arrow-right me-1"></i>
@@ -17,17 +20,17 @@
 </a>
 {% endblock %} {% block content %}
 <main class="content container">
-  <h1>Profile: {{ user.username }}</h1>
+  <h1>Profile: {{ view_user.username }}</h1>
   <div class="p-4">
     <section>
       <h3 class="dark-text">Bio</h3>
       <div class="card bg-dark m-3 my-4">
-        <div class="card-body">{{ user.bio }}</div>
+        <div class="card-body">{{ view_user.bio }}</div>
       </div>
     </section>
     <section class="pt-2">
       <h3 class="dark-text">Insights</h3>
-      {% for insight in user.insights %}
+      {% for insight in view_user.insights %}
       <div class="card bg-dark m-3 my-4">
         <div class="card-body">
           <h4 class="card-title">{{ insight.title }}</h4>

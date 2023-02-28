@@ -40,44 +40,45 @@ class Insight(db.Model):
 
 @app.route("/")
 def index():
-    user = session['user_id']
+    auth_user = User.query.get(session['user_id'])
 
     # Go straight to feed if logged in
-    if user:
+    if auth_user:
         all_insights = Insight.query.order_by(Insight.date.desc()).all()
-        return render_template("feed.html", insights=all_insights)
+        return render_template("feed.html", auth_user=auth_user, insights=all_insights)
     
     # Otherwise show login
     messages = get_flashed_messages()
-    return render_template("login.html", messages=messages)
+    return render_template("login.html", auth_user=auth_user, messages=messages)
 
 
 @app.route("/profile")
 @app.route("/profile/<string:username>")
 def profile(username=None):
-    user = User.query.get(session['user_id'])
+    auth_user = User.query.get(session['user_id'])
     # Give a 401 unauthorized error if not signed in
-    if not user:
+    if not auth_user:
         abort(401)
 
     # Attempt to access specific profile if username provided (otherwise it'll go to the logged in user's profile)
+    view_user = auth_user
     if username:
-        user = User.query.filter_by(username=username).first()
+        view_user = User.query.filter_by(username=username).first() # User whose profile you're attempting to view
         # Give a 404 not found error if they try to access an unknown username
-        if not user:
+        if not view_user:
             abort(404)
     
-    return render_template("profile.html", user=user)
+    return render_template("profile.html", auth_user=auth_user, view_user=view_user)
 
 
 @app.route("/post")
 def post():
-    user = User.query.get(session['user_id'])
+    auth_user = User.query.get(session['user_id'])
     # Give a 401 unauthorized error if not signed in
-    if not user:
+    if not auth_user:
         abort(401)
     
-    return render_template("post.html")
+    return render_template("post.html", auth_user=auth_user)
 
 
 # Backend-only POST API Endpoints
@@ -87,9 +88,11 @@ def post():
 def api_login():
     username = request.form['username']
     password = request.form['password']
-    user = User.query.filter_by(username=username, password=password).first()
-    if user:
-        session['user_id'] = user.id
+
+    matching_user = User.query.filter_by(username=username, password=password).first()
+
+    if matching_user:
+        session['user_id'] = matching_user.id
     else:
         flash('Invalid username or password. Try again.', 'error')
     return redirect(url_for('index'))
@@ -103,9 +106,15 @@ def api_logout():
 
 @app.route("/api/post", methods=['POST'])
 def api_post():
+    auth_user = User.query.get(session['user_id'])
+    # Give a 401 unauthorized error if not signed in
+    if not auth_user:
+        abort(401)
+    
     title = request.form["insight-title"]
     body = request.form["insight-body"]
-    author = User.query.get(session['user_id'])
+    author = auth_user
+
     if title and body and author:
         insight = Insight(title=title, body=body, author_id=author.id)
         db.session.add(insight)
