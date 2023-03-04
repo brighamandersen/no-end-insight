@@ -9,7 +9,7 @@
 
 html,
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Nunito', Helvetica, sans-serif;
   background: black;
   color: var(--light-text-color);
   height: 100%;
