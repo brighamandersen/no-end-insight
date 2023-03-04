@@ -20,12 +20,6 @@ textarea {
   width: 100%;
 }
 
-/* .navbar-right a {
-  color: red;
-  background: purple;
-  padding
-} */
-
 a {
   color: var(--bs-warning);
 }
