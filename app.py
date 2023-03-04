@@ -67,8 +67,9 @@ def profile(username=None):
         # Give a 404 not found error if they try to access an unknown username
         if not view_user:
             abort(404)
+    own_profile = auth_user.id == view_user.id
     
-    return render_template("profile.html", auth_user=auth_user, view_user=view_user)
+    return render_template("profile.html", auth_user=auth_user, view_user=view_user, own_profile=own_profile)
 
 
 @app.route("/post")
