@@ -16,11 +16,11 @@
   <span>Log Out</span>
 </a>
 {% endblock %} {% block content %}
-<main class="content container">
+<main class="content col-sm-12 col-md-8 mx-auto">
   <h1>My Feed</h1>
   <section class="pt-2">
     {% for insight in insights %}
-    <div class="card bg-dark m-3 my-4">
+    <div class="card bg-dark my-4">
       <div class="card-body">
         <h4 class="card-title">{{ insight.title }}</h4>
         <blockquote class="blockquote mb-0">

@@ -16,10 +16,10 @@
   <span>Log Out</span>
 </a>
 {% endblock %} {% block content %}
-<main class="content container">
+<main class="content col-sm-12 col-md-8 mx-auto">
   <h1>New Post</h1>
   <form method="POST" action="{{ url_for('api_post') }}">
-    <section class="p-4">
+    <section class="py-4">
       <h3 class="dark-text">Insight Title</h3>
       <input
         type="text"
@@ -30,7 +30,7 @@
         required
       />
     </section>
-    <section class="p-4">
+    <section class="py-4">
       <h3 class="dark-text">Insight Body</h3>
       <textarea
         class="bg-dark text-white rounded"
@@ -41,7 +41,7 @@
         required
       ></textarea>
     </section>
-    <section class="p-4">
+    <section class="py-4">
       <input
         type="submit"
         class="btn btn-warning yellow-btn w-100"
