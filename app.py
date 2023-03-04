@@ -40,7 +40,7 @@ class Insight(db.Model):
 
 @app.route("/")
 def index():
-    auth_user = User.query.get(session['user_id'])
+    auth_user = User.query.get(session.get('user_id'))
 
     # Go straight to feed if logged in
     if auth_user:
@@ -55,7 +55,7 @@ def index():
 @app.route("/profile")
 @app.route("/profile/<string:username>")
 def profile(username=None):
-    auth_user = User.query.get(session['user_id'])
+    auth_user = User.query.get(session.get('user_id'))
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -73,7 +73,7 @@ def profile(username=None):
 
 @app.route("/post")
 def post():
-    auth_user = User.query.get(session['user_id'])
+    auth_user = User.query.get(session.get('user_id'))
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -106,7 +106,7 @@ def api_logout():
 
 @app.route("/api/post", methods=['POST'])
 def api_post():
-    auth_user = User.query.get(session['user_id'])
+    auth_user = User.query.get(session.get('user_id'))
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
