@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
 <div class="row align-items-center d-flex flex-column flex-md-row">
-  <div class="col-md-6 col-sm-6 order-2 order-md-1">
+  <div class="col-md-6 order-2 order-md-1">
     <img
       class="home-lightbulb-pic mx-auto d-block"
       src="{{ url_for('static', filename='lightbulb.webp') }}"
@@ -16,7 +16,7 @@
       </p>
     </section>
   </div>
-  <div class="col-md-6 col-sm-6 order-1 order-md-2">
+  <div class="col-md-6 order-1 order-md-2">
     <div class="card bg-dark p-4 m-4">
       <form method="POST" action="{{ url_for('api_login') }}">
         <label for="username">Username</label>

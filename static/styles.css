@@ -50,7 +50,6 @@ nav {
   min-height: calc(
     100% - var(--navbar-footer-height) - var(--navbar-footer-height)
   );
-  padding-bottom: var(--navbar-footer-height);
 }
 
 /* Partially override 'btn-warning' Bootstrap */
