@@ -16,24 +16,22 @@
   <span>Log Out</span>
 </a>
 {% endblock %} {% block content %}
-<main class="content container">
-  <h1>My Feed</h1>
-  <section class="pt-2">
-    {% for insight in insights %}
-    <div class="card bg-dark m-3 my-4">
-      <div class="card-body">
-        <h4 class="card-title">{{ insight.title }}</h4>
-        <blockquote class="blockquote mb-0">
-          <p class="dark-text">{{ insight.body }}</p>
-          <footer class="blockquote-footer pt-3">
-            <a href="{{ url_for('profile',username=insight.author.username) }}"
-              >{{ insight.author.username }}</a
-            >, {{ insight.date.strftime("%m-%d-%y") }}
-          </footer>
-        </blockquote>
-      </div>
+<h1>My Feed</h1>
+<section class="pt-2">
+  {% for insight in insights %}
+  <div class="card bg-dark m-3 my-4">
+    <div class="card-body">
+      <h4 class="card-title">{{ insight.title }}</h4>
+      <blockquote class="blockquote mb-0">
+        <p class="dark-text">{{ insight.body }}</p>
+        <footer class="blockquote-footer pt-3">
+          <a href="{{ url_for('profile',username=insight.author.username) }}"
+            >{{ insight.author.username }}</a
+          >, {{ insight.date.strftime("%m-%d-%y") }}
+        </footer>
+      </blockquote>
     </div>
-    {% endfor %}
-  </section>
-</main>
+  </div>
+  {% endfor %}
+</section>
 {% endblock %}

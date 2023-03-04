@@ -66,14 +66,17 @@
         </div>
       </div>
     </nav>
-    {% block content %} {% endblock %}
+    <!-- Main content -->
+    <main class="content container">{% block content %}{% endblock %}</main>
     <!-- Footer -->
-    <div class="container-fluid bg-dark">
-      <div class="row justify-content-center align-items-center py-3">
-        <div class="col d-flex justify-content-center">
+    <div
+      class="nav-footer container-fluid bg-dark d-flex justify-content-center align-items-center"
+    >
+      <div class="row py-2 w-100 d-flex">
+        <div class="col d-flex justify-content-center align-items-center">
           <span class="dark-text">No End Insight</span>
         </div>
-        <div class="col d-flex justify-content-center">
+        <div class="col d-flex justify-content-center align-items-center">
           <a
             class="btn btn-outline-light float-right"
             href="https://github.com/brighamband/flask-no-end-insight"

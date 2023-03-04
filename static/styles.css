@@ -3,7 +3,8 @@
   --light-text-color: #ebe9ec;
   --dark-text-color: #9b9797; /* Darker version */
   /* Yellow is --bs-warning bootstrap warning color */
-  color-scheme: dark;
+  --navbar-footer-height: 70px;
+  color-scheme: dark; /* Makes scrollbar dark */
 }
 
 html,
@@ -11,6 +12,8 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   background: black;
   color: var(--light-text-color);
+  height: 100%;
+  margin: 0;
 }
 
 input,
@@ -24,8 +27,15 @@ a {
   color: var(--bs-warning);
 }
 
+nav {
+  height: var(--navbar-footer-height);
+}
+
+.nav-footer {
+  height: var(--navbar-footer-height);
+}
+
 .navbar-brand {
-  padding: 0;
   font-weight: bold;
 }
 
@@ -37,8 +47,10 @@ a {
 
 .content {
   padding: 2rem;
-  min-height: 85vh;
-  padding-bottom: 2.5rem;
+  min-height: calc(
+    100% - var(--navbar-footer-height) - var(--navbar-footer-height)
+  );
+  padding-bottom: var(--navbar-footer-height);
 }
 
 /* Partially override 'btn-warning' Bootstrap */

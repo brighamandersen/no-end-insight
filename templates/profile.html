@@ -19,34 +19,31 @@
   <span>Log Out</span>
 </a>
 {% endblock %} {% block content %}
-<main class="content container">
-  <h1>Profile: {{ view_user.username }}</h1>
-  <div class="p-4">
-    <section>
-      <h3 class="dark-text">Bio</h3>
-      <div class="card bg-dark m-3 my-4">
-        <div class="card-body">{{ view_user.bio }}</div>
+<h1>Profile: {{ view_user.username }}</h1>
+<div class="p-4">
+  <section>
+    <h3 class="dark-text">Bio</h3>
+    <div class="card bg-dark m-3 my-4">
+      <div class="card-body">{{ view_user.bio }}</div>
+    </div>
+  </section>
+  <section class="pt-2">
+    <h3 class="dark-text">Insights</h3>
+    {% for insight in view_user.insights %}
+    <div class="card bg-dark m-3 my-4">
+      <div class="card-body">
+        <h4 class="card-title">{{ insight.title }}</h4>
+        <blockquote class="blockquote mb-0">
+          <p class="dark-text">{{ insight.body }}</p>
+          <footer class="blockquote-footer pt-3">
+            <a href="{{ url_for('profile',username=insight.author.username) }}"
+              >{{ insight.author.username }}</a
+            >, {{ insight.date.strftime("%m-%d-%y") }}
+          </footer>
+        </blockquote>
       </div>
-    </section>
-    <section class="pt-2">
-      <h3 class="dark-text">Insights</h3>
-      {% for insight in view_user.insights %}
-      <div class="card bg-dark m-3 my-4">
-        <div class="card-body">
-          <h4 class="card-title">{{ insight.title }}</h4>
-          <blockquote class="blockquote mb-0">
-            <p class="dark-text">{{ insight.body }}</p>
-            <footer class="blockquote-footer pt-3">
-              <a
-                href="{{ url_for('profile',username=insight.author.username) }}"
-                >{{ insight.author.username }}</a
-              >, {{ insight.date.strftime("%m-%d-%y") }}
-            </footer>
-          </blockquote>
-        </div>
-      </div>
-      {% endfor %}
-    </section>
-  </div>
-</main>
+    </div>
+    {% endfor %}
+  </section>
+</div>
 {% endblock %}
