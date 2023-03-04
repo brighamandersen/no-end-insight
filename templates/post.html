@@ -16,36 +16,38 @@
   <span>Log Out</span>
 </a>
 {% endblock %} {% block content %}
-<h1>New Post</h1>
-<form method="POST" action="{{ url_for('api_post') }}">
-  <section class="p-4">
-    <h3 class="dark-text">Insight Title</h3>
-    <input
-      type="text"
-      class="bg-dark text-white rounded"
-      name="insight-title"
-      id="insight-title"
-      placeholder="Type title here"
-      required
-    />
-  </section>
-  <section class="p-4">
-    <h3 class="dark-text">Insight Body</h3>
-    <textarea
-      class="bg-dark text-white rounded"
-      name="insight-body"
-      id="insight-body"
-      rows="5"
-      placeholder="Type body here"
-      required
-    ></textarea>
-  </section>
-  <section class="p-4">
-    <input
-      type="submit"
-      class="btn btn-warning yellow-btn w-100"
-      value="Post"
-    />
-  </section>
-</form>
+<main class="content container">
+  <h1>New Post</h1>
+  <form method="POST" action="{{ url_for('api_post') }}">
+    <section class="p-4">
+      <h3 class="dark-text">Insight Title</h3>
+      <input
+        type="text"
+        class="bg-dark text-white rounded"
+        name="insight-title"
+        id="insight-title"
+        placeholder="Type title here"
+        required
+      />
+    </section>
+    <section class="p-4">
+      <h3 class="dark-text">Insight Body</h3>
+      <textarea
+        class="bg-dark text-white rounded"
+        name="insight-body"
+        id="insight-body"
+        rows="5"
+        placeholder="Type body here"
+        required
+      ></textarea>
+    </section>
+    <section class="p-4">
+      <input
+        type="submit"
+        class="btn btn-warning yellow-btn w-100"
+        value="Post"
+      />
+    </section>
+  </form>
+</main>
 {% endblock %}
