@@ -28,7 +28,9 @@ a {
 }
 
 nav {
-  height: var(--navbar-footer-height);
+  min-height: var(
+    --navbar-footer-height
+  ); /* Min height and not just height because navbar expands with mobile hamburger menu */
 }
 
 .nav-footer {
