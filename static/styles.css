@@ -51,7 +51,7 @@ nav {
   padding: 2rem;
   /* Have main content be whatever vertical space is left that navbar and footer didn't take */
   min-height: calc(
-    100% - var(--navbar-footer-height) - var(--navbar-footer-height)
+    100vh - var(--navbar-footer-height) - var(--navbar-footer-height)
   );
 }
 
