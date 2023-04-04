@@ -52,6 +52,12 @@ def index():
     return render_template("login.html", auth_user=auth_user, messages=messages)
 
 
+@app.route("/register")
+def register():
+    messages = get_flashed_messages()
+    return render_template("register.html", messages=messages)
+
+
 @app.route("/profile")
 @app.route("/profile/<string:username>")
 def profile(username=None):
@@ -97,7 +103,37 @@ def api_login():
     else:
         flash('Invalid username or password. Try again.', 'error')
     return redirect(url_for('index'))
-    
+
+
+@app.route("/api/register", methods=['POST'])
+def api_register():
+    username = request.form['username']
+    password = request.form['password']
+    confirm_password = request.form['passwordConfirm']
+
+    # Check if user already exists
+    user_found = User.query.filter_by(username=username).first()
+    if user_found:
+        flash(f'The username {username} is already taken.', 'error')
+        return redirect(url_for("register"))
+
+
+    # Check if passwords don't match
+    if password != confirm_password:
+        flash('Passwords do not match.', 'error')
+        return redirect(url_for("register"))
+
+    # Check if password is too short
+    if len(password) < 5:
+        flash('Password too short.', 'error')
+        return redirect(url_for("register"))
+
+    user = User(username=username, password=password)
+    db.session.add(user)
+    db.session.commit()
+
+    return api_login()
+
 
 @app.route("/api/logout")
 def api_logout():
