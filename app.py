@@ -160,5 +160,25 @@ def api_post():
     return redirect(url_for("index"))
 
 
+@app.route("/api/update-bio", methods=['POST'])
+def api_update_bio():
+    auth_user = User.query.get(session.get('user_id'))
+    # Give a 401 unauthorized error if not signed in
+    if not auth_user:
+        abort(401)
+    
+    new_bio = request.form.get('bio')
+
+    if new_bio:
+        auth_user.bio = new_bio
+        db.session.commit()
+        flash('Bio updated successfully', 'success')
+    else:
+        flash('Invalid bio data', 'error')
+    
+    # Refresh profile page
+    return redirect(url_for("profile"))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
