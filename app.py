@@ -12,12 +12,14 @@ app.secret_key = os.environ.get('SECRET_KEY')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app.db')
 
+if os.environ.get('FLASK_DEBUG') == '1':
+    app.config['DEBUG'] = True
+else:
+    app.config['DEBUG'] = False
 
 db = SQLAlchemy(app)
 
-
 # Models
-
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -181,4 +183,4 @@ def api_update_bio():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
