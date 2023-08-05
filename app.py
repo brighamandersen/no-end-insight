@@ -36,13 +36,21 @@ class Insight(db.Model):
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
+# Utils
+
+def getAuthUserFromSession():
+    user_id = session.get('user_id')
+
+    if not user_id:
+        return None
+    
+    return User.query.get(user_id)
 
 # Routes
 
-
 @app.route("/")
 def index():
-    auth_user = User.query.get(session.get('user_id'))
+    auth_user = getAuthUserFromSession()
 
     # Go straight to feed if logged in
     if auth_user:
@@ -63,7 +71,7 @@ def register():
 @app.route("/profile")
 @app.route("/profile/<string:username>")
 def profile(username=None):
-    auth_user = User.query.get(session.get('user_id'))
+    auth_user = getAuthUserFromSession()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -82,7 +90,7 @@ def profile(username=None):
 
 @app.route("/post")
 def post():
-    auth_user = User.query.get(session.get('user_id'))
+    auth_user = getAuthUserFromSession()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -91,7 +99,6 @@ def post():
 
 
 # Backend-only POST API Endpoints
-
 
 @app.route("/api/login", methods=['POST'])
 def api_login():
@@ -145,7 +152,7 @@ def api_logout():
 
 @app.route("/api/post", methods=['POST'])
 def api_post():
-    auth_user = User.query.get(session.get('user_id'))
+    auth_user = getAuthUserFromSession()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -164,7 +171,7 @@ def api_post():
 
 @app.route("/api/update-bio", methods=['POST'])
 def api_update_bio():
-    auth_user = User.query.get(session.get('user_id'))
+    auth_user = getAuthUserFromSession()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
