@@ -38,7 +38,7 @@ class Insight(db.Model):
 
 # Utils
 
-def getAuthUserFromSession():
+def get_auth_user_from_session():
     user_id = session.get('user_id')
 
     if not user_id:
@@ -50,7 +50,7 @@ def getAuthUserFromSession():
 
 @app.route("/")
 def index():
-    auth_user = getAuthUserFromSession()
+    auth_user = get_auth_user_from_session()
 
     # Go straight to feed if logged in
     if auth_user:
@@ -71,7 +71,7 @@ def register():
 @app.route("/profile")
 @app.route("/profile/<string:username>")
 def profile(username=None):
-    auth_user = getAuthUserFromSession()
+    auth_user = get_auth_user_from_session()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -90,7 +90,7 @@ def profile(username=None):
 
 @app.route("/post")
 def post():
-    auth_user = getAuthUserFromSession()
+    auth_user = get_auth_user_from_session()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -152,7 +152,7 @@ def api_logout():
 
 @app.route("/api/post", methods=['POST'])
 def api_post():
-    auth_user = getAuthUserFromSession()
+    auth_user = get_auth_user_from_session()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
@@ -171,7 +171,7 @@ def api_post():
 
 @app.route("/api/update-bio", methods=['POST'])
 def api_update_bio():
-    auth_user = getAuthUserFromSession()
+    auth_user = get_auth_user_from_session()
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
