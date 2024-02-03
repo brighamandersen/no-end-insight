@@ -1,4 +1,8 @@
-# Command to run gunicorn
+# No End Insight
+
+An online social media platform for sharing uplifting insights! Only the front-end (HTML and Bootstrap CSS) was completed for school, and I've since hooked it up with a back-end with live data as a fun side project!
+
+### Command to run gunicorn
 
 `python3 -m gunicorn -w 1 --bind 0.0.0.0:5000 wsgi:app --daemon`
 
