@@ -10,16 +10,13 @@ app = Flask(__name__)
 
 app.secret_key = os.environ.get('SECRET_KEY')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app.db')
-
-if os.environ.get('FLASK_DEBUG') == '1':
-    app.config['DEBUG'] = True
-else:
-    app.config['DEBUG'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+    os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app.db')
 
 db = SQLAlchemy(app)
 
 # Models
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -38,15 +35,17 @@ class Insight(db.Model):
 
 # Utils
 
+
 def get_auth_user_from_session():
     user_id = session.get('user_id')
 
     if not user_id:
         return None
-    
+
     return User.query.get(user_id)
 
 # Routes
+
 
 @app.route("/")
 def index():
@@ -56,7 +55,7 @@ def index():
     if auth_user:
         all_insights = Insight.query.order_by(Insight.date.desc()).all()
         return render_template("feed.html", auth_user=auth_user, insights=all_insights)
-    
+
     # Otherwise show login
     messages = get_flashed_messages()
     return render_template("login.html", auth_user=auth_user, messages=messages)
@@ -79,12 +78,13 @@ def profile(username=None):
     # Attempt to access specific profile if username provided (otherwise it'll go to the logged in user's profile)
     view_user = auth_user
     if username:
-        view_user = User.query.filter_by(username=username).first() # User whose profile you're attempting to view
+        # User whose profile you're attempting to view
+        view_user = User.query.filter_by(username=username).first()
         # Give a 404 not found error if they try to access an unknown username
         if not view_user:
             abort(404)
     own_profile = auth_user.id == view_user.id
-    
+
     return render_template("profile.html", auth_user=auth_user, view_user=view_user, own_profile=own_profile)
 
 
@@ -94,7 +94,7 @@ def post():
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
-    
+
     return render_template("post.html", auth_user=auth_user)
 
 
@@ -105,7 +105,8 @@ def api_login():
     username = request.form['username']
     password = request.form['password']
 
-    matching_user = User.query.filter_by(username=username, password=password).first()
+    matching_user = User.query.filter_by(
+        username=username, password=password).first()
 
     if matching_user:
         session['user_id'] = matching_user.id
@@ -126,7 +127,6 @@ def api_register():
         flash(f'The username {username} is already taken.', 'error')
         return redirect(url_for("register"))
 
-
     # Check if passwords don't match
     if password != confirm_password:
         flash('Passwords do not match.', 'error')
@@ -146,7 +146,7 @@ def api_register():
 
 @app.route("/api/logout")
 def api_logout():
-    session['user_id'] = None # Nullify user's session id
+    session['user_id'] = None  # Nullify user's session id
     return redirect(url_for('index'))
 
 
@@ -156,7 +156,7 @@ def api_post():
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
-    
+
     title = request.form["insight-title"]
     body = request.form["insight-body"]
     author = auth_user
@@ -175,7 +175,7 @@ def api_update_bio():
     # Give a 401 unauthorized error if not signed in
     if not auth_user:
         abort(401)
-    
+
     new_bio = request.form.get('bio')
 
     if new_bio:
@@ -184,10 +184,10 @@ def api_update_bio():
         flash('Bio updated successfully', 'success')
     else:
         flash('Invalid bio data', 'error')
-    
+
     # Refresh profile page
     return redirect(url_for("profile"))
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
