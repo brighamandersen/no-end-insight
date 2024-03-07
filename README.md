@@ -8,6 +8,8 @@ An online social media platform for sharing uplifting insights! Only the front-e
 touch .env
 ```
 
+Make sure to fill `.env` with correct contents (see [`.env.example`](/.env.example)).
+
 ### Usage locally
 
 ```
