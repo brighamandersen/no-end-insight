@@ -1,0 +1,6 @@
+{
+  "apps": {
+    "name": "flask-todo",
+    "script": "python3 -m gunicorn -w 1 --bind 0.0.0.0:5000 wsgi:app"
+  }
+}
