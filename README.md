@@ -6,9 +6,42 @@ An online social media platform for sharing uplifting insights! Only the front-e
 
 ```
 touch .env
+pip install -r requirements.txt
 ```
 
 Make sure to fill `.env` with correct contents (see [`.env.example`](/.env.example)).
+
+## Virtual environment commands
+
+Create virtual environment
+
+```
+python -m venv .venv
+```
+
+Activate virtual environment
+
+```
+source .venv/bin/activate
+```
+
+Deactivate virtual environment
+
+```
+deactivate
+```
+
+Update requirements.txt with currently installed dependencies
+
+```
+pip freeze > requirements.txt
+```
+
+Install dependencies listed in requirements.txt
+
+```
+pip install -r requirements.txt
+```
 
 ### Usage locally
 
@@ -16,9 +49,7 @@ Make sure to fill `.env` with correct contents (see [`.env.example`](/.env.examp
 python app.py
 ```
 
-### Usage with gunicorn
-
-## Deploy to production
+### Usage with gunicorn - deploy to production
 
 ```
 pm2 start pm2.json
