@@ -6,6 +6,8 @@ An online social media platform for sharing uplifting insights! Only the front-e
 
 ```
 touch .env
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
