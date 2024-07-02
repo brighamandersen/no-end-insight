@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 Make sure to fill `.env` with correct contents (see [`.env.example`](/.env.example)).
 
-## Virtual environment commands
+### Virtual environment commands
 
 Create virtual environment
 
@@ -51,7 +51,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-### Usage with gunicorn - deploy to production
+### Usage/deployment to production
 
 ```
 pm2 start pm2.json
