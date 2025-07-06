@@ -2,6 +2,16 @@
 
 An online social media platform for sharing uplifting insights! Only the front-end (HTML and Bootstrap CSS) was completed for school, and I've since hooked it up with a back-end with live data as a fun side project!
 
+![Feed Screenshot](./README-assets/README-feed-screenshot.png)
+
+![New Post Screenshot](./README-assets/README-new-post-screenshot.png)
+
+![Profile Screenshot](./README-assets/README-profile-screenshot.png)
+
+![Login Screenshot](./README-assets/README-login-screenshot.png)
+
+![Register Screenshot](./README-assets/README-register-screenshot.png)
+
 ![Demo Screenshot 1](./README-assets/README-demo-screenshot1.webp)
 
 ![Demo Screenshot 2](./README-assets/README-demo-screenshot2.webp)
