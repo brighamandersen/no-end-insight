@@ -12,16 +12,6 @@ An online social media platform for sharing uplifting insights! Only the front-e
 
 ![Register Screenshot](./README-assets/README-register-screenshot.png)
 
-![Demo Screenshot 1](./README-assets/README-demo-screenshot1.webp)
-
-![Demo Screenshot 2](./README-assets/README-demo-screenshot2.webp)
-
-![Demo Screenshot 3](./README-assets/README-demo-screenshot3.webp)
-
-![Demo Screenshot 4](./README-assets/README-demo-screenshot4.webp)
-
-![Demo Screenshot 5](./README-assets/README-demo-screenshot5.webp)
-
 ### Installation
 
 ```
