@@ -1,6 +1,8 @@
 {
-  "apps": {
-    "name": "insight",
-    "script": "python3 -m gunicorn -w 1 --bind 0.0.0.0:5003 wsgi:app"
-  }
+  "apps": [
+    {
+      "name": "insight",
+      "script": "python3 -m gunicorn -w 1 --bind 0.0.0.0:5003 wsgi:app"
+    }
+  ]
 }
