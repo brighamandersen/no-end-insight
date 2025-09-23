@@ -3,9 +3,9 @@ set -euo pipefail
 
 echo "Deploying insight"
 
-sudo ln -sf /home/brig/code/no-end-insight/systemd/insight.service /etc/systemd/system/insight.service
+sudo ln -sf /home/brig/code/no-end-insight/infra/systemd/insight.service /etc/systemd/system/insight.service
 
-sudo ln -sf /home/brig/code/no-end-insight/nginx/insight.conf /etc/nginx/conf.d/insight.conf
+sudo ln -sf /home/brig/code/no-end-insight/infra/nginx/insight.conf /etc/nginx/conf.d/insight.conf
 
 sudo systemctl daemon-reload
 sudo systemctl enable insight.service
