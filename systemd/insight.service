@@ -1,0 +1,15 @@
+[Unit]
+Description=insight
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/home/brig/code/no-end-insight
+ExecStart=/home/brig/code/no-end-insight/.venv/bin/python3 -m gunicorn -w 1 --bind 0.0.0.0:3006 wsgi:app
+Restart=always
+RestartSec=5
+Environment="PATH=/home/brig/code/no-end-insight/.venv/bin:$PATH"
+
+[Install]
+WantedBy=multi-user.target
