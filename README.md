@@ -65,7 +65,7 @@ python app.py
 
 ```bash
 cd path/to/repo
-./infra/deploy.sh
+./deploy/deploy.sh
 ```
 
 ### TODO
