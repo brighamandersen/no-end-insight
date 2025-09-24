@@ -63,9 +63,9 @@ python app.py
 
 ### Usage/deployment to production
 
-```
+```bash
 cd path/to/repo
-./deploy.sh
+./infra/deploy.sh
 ```
 
 ### TODO
