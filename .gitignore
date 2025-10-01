@@ -3,4 +3,3 @@ __pycache__
 .env
 .DS_STORE
 app.db
-pm2.log
